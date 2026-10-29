@@ -1,0 +1,163 @@
+{
+  "title": "月下 · 中秋首页 · 双参考精修",
+  "version": "4.0",
+  "date": "2026-10-29",
+  "skill": "finesse-ui 0.22.0",
+  "reference": "Two user-provided mobile UI references, hierarchy study only",
+  "files": [
+    {
+      "file": "index.html",
+      "bytes": 6344,
+      "sha256": "8482a97dd67c10e02c02c48f6c5df8dc8574ee1c5b8eeff46260f25dd70241e2"
+    },
+    {
+      "file": "home.html",
+      "bytes": 12067,
+      "sha256": "2aff89eb67d8b94c4a4eff38604c1b5b38d6286ca75d3d725044037147a73b88"
+    },
+    {
+      "file": "style.css",
+      "bytes": 43484,
+      "sha256": "1ce39e8467c7e06bf45b60c9dd100aa13eaa4f781fcc639e1125e76c2b9c8d7d"
+    },
+    {
+      "file": "portal.css",
+      "bytes": 10912,
+      "sha256": "b4c71a60067cd7b70f6f95bf2cf7f792167fe2f8521d6c5de3eccd590bddfffe"
+    },
+    {
+      "file": "polish-v4.css",
+      "bytes": 6928,
+      "sha256": "fb417b95c00d5af48887ad8763c2f8d9735437949c21d3f24cd16cedf09f066d"
+    },
+    {
+      "file": "app.js",
+      "bytes": 20588,
+      "sha256": "ea923a835672388fe506c2f3d26ba38235a6f5da3c001d277cc058edcefe7711"
+    },
+    {
+      "file": "compare-v4.html",
+      "bytes": 2116,
+      "sha256": "2f20068d66b71f5be0e1289c1a01fbe78b1e49a3c8ef007f96d55d36d80945ba"
+    },
+    {
+      "file": "serve.cjs",
+      "bytes": 1041,
+      "sha256": "fa239393922fc5cc5b8eda14aab1d301eeea5836ca68665cfa34c78f2ba51a60"
+    },
+    {
+      "file": "启动预览.cmd",
+      "bytes": 72,
+      "sha256": "0b786750469757f9526dbe517e8c0eeeb55d50b8bd8ff4a9de8c0e6f0fba97c8"
+    },
+    {
+      "file": "capture-v4.cjs",
+      "bytes": 9799,
+      "sha256": "31489bf13eaa71b2d8e3a60a4533b4b59c3e3d830fe0d40b33a5989c26d0775a"
+    },
+    {
+      "file": "README_交付说明.md",
+      "bytes": 2792,
+      "sha256": "c64dff2ed6e97d25b6d09249d4fde9eff06e071fbe11b8e57c0bfe84ab2be56e"
+    },
+    {
+      "file": "第二参考审查_v4.md",
+      "bytes": 2561,
+      "sha256": "fd2d3d7532883f96d5ee6d532862127be9da40d5e80e60d68a33873fe985ff6a"
+    },
+    {
+      "file": "设计理念.md",
+      "bytes": 1382,
+      "sha256": "d7a3dfa7a7a612f84e2e2f9335a3e4535bfac65ed6a3f7711ebec88bff98c21f"
+    },
+    {
+      "file": "主视觉生成提示词.md",
+      "bytes": 1999,
+      "sha256": "db91ee9b44dd037801094b279a4e65318937e8e5966920390f75b77ded4bd1ed"
+    },
+    {
+      "file": "游园场景素材记录_v4.md",
+      "bytes": 2197,
+      "sha256": "45036f4ec1fd0e27b3b2dde27f6487d3d8a6933b8f9bb7e686609a06caefae5f"
+    },
+    {
+      "file": "v4_静态扫描.json",
+      "bytes": 1429,
+      "sha256": "47f33b3591826f0f5b198d7fb0d4dcf406fccb13d0c81922a900dc1969a921b4"
+    },
+    {
+      "file": "v4_界面与交互核验.json",
+      "bytes": 3880,
+      "sha256": "35bd8a14db88d798f145130bec10b22857ab84242bb1e7ab601c41e4c58ac6e0"
+    },
+    {
+      "file": "中秋首页_首屏_v3.png",
+      "bytes": 710007,
+      "sha256": "a59365ef00b36e03b53b44874b139a4b4c57b41542cf50ef38c505ee6bb191f5",
+      "width": 1170,
+      "height": 2532
+    },
+    {
+      "file": "中秋首页_首屏_v4.png",
+      "bytes": 1228121,
+      "sha256": "03772c085bad377f1233848d6cc0d71e9ea98c5531e196085621e835acb2757e",
+      "width": 1170,
+      "height": 2532
+    },
+    {
+      "file": "中秋首页_完整长图_v4.png",
+      "bytes": 1625076,
+      "sha256": "70967f9316a3ff18e7304aaa612fb950de263c42cd7efa56331127f80efaa608",
+      "width": 1170,
+      "height": 4125
+    },
+    {
+      "file": "中秋首页_设计展示_v4.png",
+      "bytes": 1887645,
+      "sha256": "cc544ffffbe1575c296600fda7de523c61da529f4966d76a84b4e35ce06c9359",
+      "width": 2160,
+      "height": 1500
+    },
+    {
+      "file": "中秋首页_v3与v4对比.png",
+      "bytes": 555904,
+      "sha256": "0bbba8fd2aa57c51b7ec4ddf76b5c6399b0d3c36cf5f7f87bee7884a532b115f",
+      "width": 2160,
+      "height": 1500
+    },
+    {
+      "file": "assets/lantern-courtyard-v4.png",
+      "bytes": 3008447,
+      "sha256": "c1f7ca78ab47719fe93b1f164757b4cd02136d32258c4bfa909ae617e077634c",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "assets/moon-garden.png",
+      "bytes": 2876713,
+      "sha256": "0ecd18160e83023a1782cd6372bbd7ac6914bccb686dfdc88d301598fc0be81b",
+      "width": 1122,
+      "height": 1402
+    },
+    {
+      "file": "assets/NotoSans-LICENSE.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "file": "assets/NotoSerif-LICENSE.txt",
+      "bytes": 4301,
+      "sha256": "6a73f9541c2de74158c0e7cf6b0a58ef774f5a780bf191f2d7ec9cc53efe2bf2"
+    },
+    {
+      "file": "assets/yue-sans.woff2",
+      "bytes": 248388,
+      "sha256": "e4b00ae3b40d1f9c8c315630cfb7a354ea3ae5288187640596383a5136ae0abc"
+    },
+    {
+      "file": "assets/yue-serif.woff2",
+      "bytes": 351336,
+      "sha256": "a09adb85a3d4b3781e81ffc2a0970ca067b147da65d08fed5fb6c1a36cb49df7"
+    }
+  ]
+}

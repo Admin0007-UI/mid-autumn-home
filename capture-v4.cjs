@@ -1,0 +1,47 @@
+const fs=require('fs'),path=require('path');
+const {chromium}=require('C:/Users/lenovo/AppData/Roaming/npm/node_modules/@playwright/mcp/node_modules/playwright');
+const root=__dirname,base='http://127.0.0.1:5188',checks={},errors=[],failed=[];
+const pause=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{
+ const browser=await chromium.launch({headless:true,executablePath:'C:/Users/lenovo/AppData/Local/ms-playwright/chromium_headless_shell-1224/chrome-headless-shell-win64/chrome-headless-shell.exe'});
+ const page=await browser.newPage({viewport:{width:390,height:844},deviceScaleFactor:3,isMobile:true,hasTouch:true});
+ page.on('pageerror',e=>errors.push(String(e)));page.on('response',r=>{if(r.status()>=400)failed.push(r.url())});
+ const close=async()=>{await page.getByRole('button',{name:'关闭弹层',exact:true}).click();await page.locator('#sheet').waitFor({state:'hidden'})};
+ try{
+  await page.goto(base+'/home.html?export=1',{waitUntil:'networkidle'});await page.evaluate(()=>document.fonts.ready);await page.evaluate(()=>Promise.all([...document.images].map(i=>i.decode())));
+  await page.screenshot({path:path.join(root,'中秋首页_首屏_v4.png'),animations:'disabled'});
+  await page.evaluate(()=>document.body.classList.add('design-export'));await page.screenshot({path:path.join(root,'中秋首页_完整长图_v4.png'),fullPage:true,animations:'disabled'});await page.evaluate(()=>document.body.classList.remove('design-export'));
+  checks.informationHierarchy=await page.evaluate(()=>{const box=s=>document.querySelector(s).getBoundingClientRect();return {searchVisible:box('.header-search').width>300&&box('.header-search').height>=44,serviceCount:document.querySelectorAll('.service-panel button').length,servicesBeforeBanner:box('.service-panel').bottom<box('.campaign-banner').top,bannerHeight:box('.campaign-banner').height,activityCards:document.querySelectorAll('.activity-tile').length,servicePanelAboveFold:box('.service-panel').bottom<box('.bottom-nav').top}});
+  checks.frames=[];
+  for(const [width,height] of [[320,640],[360,800],[375,812],[390,844],[414,896],[430,932],[768,844],[1280,720]]){
+   await page.setViewportSize({width,height});
+   checks.frames.push(await page.evaluate(()=>{const pane=document.querySelector('#app-scroll'),nav=document.querySelector('.bottom-nav');return {width:innerWidth,height:innerHeight,bodyLocked:getComputedStyle(document.body).overflowY==='hidden',horizontalOverflow:document.documentElement.scrollWidth>innerWidth||pane.scrollWidth>pane.clientWidth,barVisible:nav.getBoundingClientRect().bottom<=innerHeight+1,smallTargets:[...document.querySelectorAll('.app button,.app a')].filter(el=>{const b=el.getBoundingClientRect();return b.width>0&&b.height>0&&(b.width<43.9||b.height<43.9)}).map(el=>el.getAttribute('aria-label')||el.textContent),textOverflow:[...document.querySelectorAll('h1,h2,.service-item,.activity-copy>b,.activity-copy>small,.gift-name')].filter(el=>el.scrollWidth>el.clientWidth+1).map(el=>el.textContent),brokenImages:[...document.images].filter(i=>!i.naturalWidth).map(i=>i.src)}}));
+  }
+  await page.setViewportSize({width:390,height:844});
+  checks.activityDestinations=[];
+  for(const type of ['gathering','riddle','wish','diy']){await page.locator(`.activity-tile[data-sheet="${type}"]`).click();checks.activityDestinations.push({type,opened:await page.locator('#sheet').getAttribute('data-current')===type});await close();}
+  checks.serviceDestinations=[];
+  for(const type of ['moon','gathering','riddle','diy','tea-guide','wish','plans']){
+   await page.locator(`.service-panel [data-sheet="${type}"]`).click();checks.serviceDestinations.push({type,opened:await page.locator('#sheet').getAttribute('data-current')===type,hasContent:(await page.locator('#sheet-content').innerText()).length>15});await close();
+  }
+  await page.getByRole('button',{name:'搜索活动与好礼'}).click();await page.getByRole('textbox',{name:'搜索活动或好礼'}).fill('茶');checks.searchTypes=await page.locator('#search-results button').count()===2;
+  await page.locator('#search-results [data-sheet="tea"]').click();await page.locator('#sheet [data-favorite="tea"]').click();checks.giftFavorite=await page.evaluate(()=>JSON.parse(localStorage.getItem('yue-favorites')).includes('tea'));
+  await page.getByRole('button',{name:'返回上一级',exact:true}).click();checks.searchBackKeepsQuery=await page.getByRole('textbox',{name:'搜索活动或好礼'}).inputValue()==='茶'&&await page.locator('#search-results button').count()===2;
+  await page.locator('#search-results [data-sheet="tea-guide"]').click();await page.locator('#plan-action').click();checks.planAdded=await page.evaluate(()=>JSON.parse(localStorage.getItem('yue-plans')).includes('tea-guide'));await close();
+  await page.locator('.service-panel [data-sheet="plans"]').click();checks.planVisible=await page.locator('.plan-open').innerText().then(s=>s.includes('桂香茶会'));await page.getByRole('button',{name:'移除桂香茶会'}).click();checks.planRemovedIndependently=await page.evaluate(()=>JSON.parse(localStorage.getItem('yue-plans')).length===0&&JSON.parse(localStorage.getItem('yue-favorites')).includes('tea'));await close();
+  await page.locator('.service-panel [data-sheet="diy"]').click();await page.locator('#plan-action').click();await page.locator('#sheet [data-favorite="diy"]').click();await close();
+  await page.getByRole('button',{name:'收藏',exact:true}).click();checks.mixedFavorites=await page.locator('#sheet-content [data-sheet]').count()===2&&await page.locator('#sheet-content').innerText().then(s=>s.includes('花灯手作')&&s.includes('秋日茶礼'));await close();
+  await page.getByRole('button',{name:'签到',exact:true}).click();await page.locator('#checkin-commit').click();const stamp=await page.evaluate(()=>localStorage.getItem('yue-checkin'));checks.checkinIdempotent=await page.locator('#checkin-commit').isDisabled();await close();
+  await page.locator('.service-panel [data-sheet="riddle"]').click();await page.getByRole('button',{name:'揭晓谜底'}).click();checks.riddleAnswer=await page.locator('#answer').isVisible();await page.getByRole('button',{name:'再猜一盏'}).click();checks.riddleNext=await page.locator('.riddle-kind').innerText().then(s=>s.includes('2 / 3'));await close();
+  await page.locator('.service-panel [data-sheet="wish"]').click();await page.locator('#save-wish').click();checks.wishValidation=await page.locator('#wish-input').getAttribute('aria-invalid')==='true';await page.locator('#wish-input').fill('愿每一份想念，都能迎来团圆。');await page.locator('#save-wish').click();await page.locator('#sheet').waitFor({state:'hidden'});
+  await page.reload({waitUntil:'networkidle'});await page.getByRole('button',{name:'我的',exact:true}).click();checks.persistence=await page.locator('.saved-wish').innerText()==='愿每一份想念，都能迎来团圆。'&&await page.evaluate(()=>JSON.parse(localStorage.getItem('yue-plans')).includes('diy'))&&stamp===await page.evaluate(()=>localStorage.getItem('yue-checkin'));await close();
+  await page.getByRole('button',{name:'搜索活动与好礼'}).click();await page.locator('#search-input').fill('没有这项内容');checks.emptySearch=await page.locator('#search-results').innerText().then(s=>s.includes('暂时没有找到'));await page.keyboard.press('Escape');await page.locator('#sheet').waitFor({state:'hidden'});checks.escapeClose=true;
+  await page.locator('.service-panel [data-sheet="moon"]').click();await pause(300);const grip=await page.locator('.sheet-grip').boundingBox();await page.mouse.move(grip.x+100,grip.y+22);await page.mouse.down();await page.mouse.move(grip.x+100,grip.y+300,{steps:16});await page.mouse.up();await page.locator('#sheet').waitFor({state:'hidden'});checks.dragDismiss=true;
+  await page.locator('.service-panel [data-scroll="gifts"]').click();await pause(600);checks.giftScroll=await page.evaluate(()=>{const gifts=document.querySelector('#gifts').getBoundingClientRect(),nav=document.querySelector('.bottom-nav').getBoundingClientRect();return gifts.top>=120&&gifts.bottom<=nav.top});
+  await page.getByRole('button',{name:'首页',exact:true}).click();await pause(600);checks.homeReturn=await page.evaluate(()=>document.querySelector('#app-scroll').scrollTop<2&&scrollY===0);
+  await page.emulateMedia({reducedMotion:'reduce'});await page.reload({waitUntil:'networkidle'});await page.locator('.service-panel [data-sheet="moon"]').click();checks.reducedMotion=await page.locator('#sheet').evaluate(el=>getComputedStyle(el).transform==='matrix(1, 0, 0, 1, 0, 0)');await close();
+  await page.evaluate(()=>localStorage.clear());
+  const passed=errors.length===0&&failed.length===0&&checks.frames.every(c=>c.bodyLocked&&!c.horizontalOverflow&&c.barVisible&&!c.smallTargets.length&&!c.textOverflow.length&&!c.brokenImages.length)&&checks.serviceDestinations.every(c=>c.opened&&c.hasContent)&&checks.activityDestinations.every(c=>c.opened)&&checks.informationHierarchy.searchVisible&&checks.informationHierarchy.serviceCount===8&&checks.informationHierarchy.servicesBeforeBanner&&checks.informationHierarchy.bannerHeight<=150&&checks.informationHierarchy.activityCards===4&&Object.entries(checks).filter(([k])=>!['informationHierarchy','frames','serviceDestinations','activityDestinations'].includes(k)).every(([,v])=>v===true);
+  fs.writeFileSync(path.join(root,'v4_界面与交互核验.json'),JSON.stringify({passed,scope:'Desktop Chromium emulation; no real user study or physical phone test',errors,failed,checks},null,2));console.log(JSON.stringify({passed,errors,failed,checks},null,2));if(!passed)process.exitCode=1;
+ }finally{await browser.close()}
+})().catch(e=>{console.error(e);process.exitCode=1});

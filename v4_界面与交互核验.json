@@ -1,0 +1,177 @@
+{
+  "passed": true,
+  "scope": "Desktop Chromium emulation; no real user study or physical phone test",
+  "errors": [],
+  "failed": [],
+  "checks": {
+    "informationHierarchy": {
+      "searchVisible": true,
+      "serviceCount": 8,
+      "servicesBeforeBanner": true,
+      "bannerHeight": 148,
+      "activityCards": 4,
+      "servicePanelAboveFold": true
+    },
+    "frames": [
+      {
+        "width": 320,
+        "height": 640,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 360,
+        "height": 800,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 375,
+        "height": 812,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 430,
+        "height": 932,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 768,
+        "height": 844,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "bodyLocked": true,
+        "horizontalOverflow": false,
+        "barVisible": true,
+        "smallTargets": [],
+        "textOverflow": [],
+        "brokenImages": []
+      }
+    ],
+    "activityDestinations": [
+      {
+        "type": "gathering",
+        "opened": true
+      },
+      {
+        "type": "riddle",
+        "opened": true
+      },
+      {
+        "type": "wish",
+        "opened": true
+      },
+      {
+        "type": "diy",
+        "opened": true
+      }
+    ],
+    "serviceDestinations": [
+      {
+        "type": "moon",
+        "opened": true,
+        "hasContent": true
+      },
+      {
+        "type": "gathering",
+        "opened": true,
+        "hasContent": true
+      },
+      {
+        "type": "riddle",
+        "opened": true,
+        "hasContent": true
+      },
+      {
+        "type": "diy",
+        "opened": true,
+        "hasContent": true
+      },
+      {
+        "type": "tea-guide",
+        "opened": true,
+        "hasContent": true
+      },
+      {
+        "type": "wish",
+        "opened": true,
+        "hasContent": true
+      },
+      {
+        "type": "plans",
+        "opened": true,
+        "hasContent": true
+      }
+    ],
+    "searchTypes": true,
+    "giftFavorite": true,
+    "searchBackKeepsQuery": true,
+    "planAdded": true,
+    "planVisible": true,
+    "planRemovedIndependently": true,
+    "mixedFavorites": true,
+    "checkinIdempotent": true,
+    "riddleAnswer": true,
+    "riddleNext": true,
+    "wishValidation": true,
+    "persistence": true,
+    "emptySearch": true,
+    "escapeClose": true,
+    "dragDismiss": true,
+    "giftScroll": true,
+    "homeReturn": true,
+    "reducedMotion": true
+  },
+  "finalAssetVerification": {
+    "loaded": true,
+    "width": 1122,
+    "height": 1402,
+    "errors": []
+  }
+}

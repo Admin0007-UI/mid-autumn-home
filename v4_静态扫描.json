@@ -1,0 +1,45 @@
+{
+  "p0": 0,
+  "files": [
+    {
+      "file": "home.html",
+      "findings": []
+    },
+    {
+      "file": "style.css",
+      "findings": []
+    },
+    {
+      "file": "portal.css",
+      "findings": []
+    },
+    {
+      "file": "polish-v4.css",
+      "findings": []
+    },
+    {
+      "file": "app.js",
+      "findings": []
+    },
+    {
+      "file": "index.html",
+      "findings": []
+    },
+    {
+      "file": "compare-v4.html",
+      "findings": []
+    }
+  ],
+  "notCovered": [
+    "default-category aesthetic (the vibe, not just token names — beige+brass craft, AI purple-glow)",
+    "div-based fake screenshots / fake dashboards",
+    "identical / generic card grids (icon + title + text × N)",
+    "zero imagery on an image-implied brief (food / hotel / fashion / travel)",
+    "glassmorphism / AI-purple-glow used as decoration",
+    "layout-family repetition (§5) and whether the soul is actually distinct",
+    "whether the engine RENDERS real pixels (needs the Playwright runtime pass, not a grep)",
+    "mobile-floor M3/M4 — clickable text wrapping to two lines, long-word overflow at 320px (needs a rendered page at 320, not a grep)",
+    "HTML fragments constructed in JavaScript: URLs resolve against the consuming document, so verify them in the browser",
+    "root-relative asset paths (`/img/x.png`) — dead-ref only resolves file-relative ones; a broken `/…` link needs the real serving root"
+  ]
+}
